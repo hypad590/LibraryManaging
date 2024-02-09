@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface BooksRepository extends MongoRepository<Books,String> {
     Books findByName(String name);
     Books findBySerialNumb(int serialNumb);
-    boolean existsByName(String name);
-    boolean existsBySerialNumb(int serialNumb);
     boolean existsByBook(Books book);
 }

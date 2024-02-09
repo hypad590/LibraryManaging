@@ -4,6 +4,8 @@ import Books.booking.Model.Books;
 import Books.booking.Repository.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 
 @org.springframework.stereotype.Service
 public class Service{
@@ -12,8 +14,11 @@ public class Service{
 
     private final Books books = new Books();
 
-    public Books getBook(String name){
-        return booksRepository.findByName(name);
+    public Optional<Books> getBooks(String name, int serialNumb){
+        Optional<Books> byName = Optional.ofNullable(booksRepository.findByName(name));
+        Optional<Books> bySerialNumb = Optional.ofNullable(booksRepository.findBySerialNumb(serialNumb));
+
+        return byName.isPresent() ? byName : bySerialNumb;
     }
 
     public void createBook(Books book){
