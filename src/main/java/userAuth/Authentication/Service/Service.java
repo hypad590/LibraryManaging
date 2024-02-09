@@ -15,7 +15,7 @@ public class Service {
     private Repository repository;
     private final User userCheckIf = new User();
 
-    public void createUser(User user){
+    public void saveUser(User user){
         repository.save(user);
     }
     public void deleteUser(User user){
@@ -30,6 +30,10 @@ public class Service {
         }else{
             throw new NoSuchElementException();
         }
+    }
+    public void setUserInfo(User relatedUser,String name, Long id){
+        relatedUser.setName(name);
+        relatedUser.setId(id);
     }
     public Optional<User> getUser(String name, Long id){
         Optional<User> byName = Optional.ofNullable(repository.findByName(name));
