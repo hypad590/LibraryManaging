@@ -31,8 +31,12 @@ public class Service {
             throw new NoSuchElementException();
         }
     }
-    public User getUser(String name){
-        return repository.findByName(name);
+    public Optional<User> getUser(String name, Long id){
+        Optional<User> byName = Optional.ofNullable(repository.findByName(name));
+        Optional<User> byId = Optional.ofNullable(repository.findById(id));
+
+        return byName.isPresent() ? byName : byId;
+
     }
 
 }
